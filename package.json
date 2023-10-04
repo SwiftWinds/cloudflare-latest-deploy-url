@@ -1,7 +1,7 @@
 {
-  "name": "cloudflare-pages-badges",
+  "name": "cloudflare-latest-deploy-url",
   "version": "1.0.0",
-  "description": "Badges for Cloudflare Pages projects",
+  "description": "Fetch latest deploy url for Cloudflare Pages projects",
   "main": "dist/worker.js",
   "scripts": {
     "build": "webpack",

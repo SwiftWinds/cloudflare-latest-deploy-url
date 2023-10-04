@@ -14,7 +14,7 @@ export interface Project {
 }
 
 export interface ProjectDeployment {
-  latest_stage?: ProjectStage;
+  id?: string;
 }
 
 export type ProjectStageStatus =

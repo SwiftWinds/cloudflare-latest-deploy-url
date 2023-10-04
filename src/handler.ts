@@ -1,5 +1,4 @@
 import { getProject } from "./service";
-import { createResponse } from "./shield";
 
 export async function handleRequest(event: FetchEvent): Promise<Response> {
   const { searchParams } = new URL(event.request.url);
@@ -14,20 +13,19 @@ export async function handleRequest(event: FetchEvent): Promise<Response> {
       return new Response("Project not found.", { status: 400 });
     }
 
-    const status = project?.canonical_deployment?.latest_stage?.status;
-    if (!status) {
+    const id = project?.canonical_deployment?.id;
+    if (!id) {
       console.error({
-        message: "Failed to resolve project status",
+        message: "Failed to resolve deployment id",
         response: project,
       });
-      return new Response("Failed to resolve project status.", { status: 400 });
+      return new Response("Failed to resolve deployment id.", { status: 400 });
     }
 
-    return new Response(JSON.stringify(createResponse(status)), {
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-      },
-    });
+    return Response.redirect(
+      `https://dash.cloudflare.com/?to=/:account/pages/view/${projectName}/${id}`,
+      302,
+    );
   } catch (error) {
     console.log((error as Error).toString());
     return new Response("Failed to resolve project.", { status: 400 });

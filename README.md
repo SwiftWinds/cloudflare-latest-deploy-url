@@ -1,10 +1,6 @@
-# cloudflare-pages-badges
-
-**Add status badges to your [Cloudflare Pages](https://pages.cloudflare.com/) projects.**
+# cloudflare-latest-deploy-url
 
 This project is deployed using [Cloudflare Workers](https://workers.cloudflare.com/), to set it up yourself, follow the [Deployment](#deployment) section.
-
-Badges are rendered using [shields.io](https://shields.io) - it makes use of the `endpoint` functionality, all this worker does is provide a JSON response that tells shields how to render your badge.
 
 ## Contributions
 
@@ -28,11 +24,10 @@ To deploy this project:
 1. Go to the Cloudflare Dashboard, get your account ID and an [API token](#generating-api-tokens).
 1. Add your account ID to the worker config: `wrangler secret put CLOUDFLARE_ACCOUNT_ID`.
 1. Add your Cloudflare API token to the worker config: `wrangler secret put CLOUDFLARE_API_KEY`.
-1. Use the following URL to get a badge:
-    ```
-    https://img.shields.io/endpoint?url=https://<WORKERS_DEV_URL>/?projectName=<NAME_OF_PAGES_PROJECT>
-    ```
-
+1. Use the following URL to get the latest deploy url:
+   ```
+   https://<WORKERS_DEV_URL>/?projectName=<NAME_OF_PAGES_PROJECT>
+   ```
 
 ## Generating API tokens
 
@@ -42,14 +37,16 @@ You will need to generate a Cloudflare API key in order to use this Worker.
 1. Click `Create Token` in the top right.
 1. Scroll down and create a `Custom Token`.
 1. Create the token:
-    - Name the token `Cloudflare Pages Badges`.
-    - Under permissions, set to `Account` -> `Cloudflare Pages` -> `Read`.
-    - Under Account Resources, only select the relevant account under `Include`.
-    - Do not define any IP address filtering, or a TTL.
-    - Click `Continue to summary`. Your response should look something like:
-        ```
-        Cloudflare Pages Badges API token summary
-        This API token will affect the below accounts and zones, along with their respective permissions
 
-        <YOUR_EMAIL>'s Account - Cloudflare Pages:Read
-        ```
+   - Name the token `Cloudflare Pages Deploy URL`.
+   - Under permissions, set to `Account` -> `Cloudflare Pages` -> `Read`.
+   - Under Account Resources, only select the relevant account under `Include`.
+   - Do not define any IP address filtering, or a TTL.
+   - Click `Continue to summary`. Your response should look something like:
+
+     ```
+     Cloudflare Pages Deploy URL API token summary
+     This API token will affect the below accounts and zones, along with their respective permissions
+
+     <YOUR_EMAIL>'s Account - Cloudflare Pages:Read
+     ```
